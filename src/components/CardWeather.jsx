@@ -1,9 +1,17 @@
-const CardWeather = ({city, current_date, current_temp, weather_icon, weather_info, description, last_weathers, isLoading}) => {
+const CardWeather = ({city, current_date, current_temp, weather_icon, weather_info, description, last_weathers, isLoading, maxHumidity}) => {
+  
+  const arr_humidity = [];
+  for (const i of last_weathers){
+    arr_humidity.push(i.humidity);
+  }
+  const max_humidity = Math.max(...arr_humidity)
+
+  
   return (
     <div className="col-md-4">
     <div className="card text-white text-center bordder-0">
       <img
-        src={`https://source.unsplash.com/600x770/?${weather_info}`}
+        src={`https://source.unsplash.com/600x900/?${weather_info}`}
         className="card-img-top"
         alt="..."
       />
@@ -21,14 +29,19 @@ const CardWeather = ({city, current_date, current_temp, weather_icon, weather_in
             <div className="text-blue">Cargando... </div>
           ) : (
             <ul>
-              {last_weathers.map((item) => (
-                <li className="small" key={item.date}>
+              {last_weathers.map((item) => {
+                const red = item.humidity === max_humidity ? 'text-danger' : '';
+  
+              return <li className={`small ${red}` } key={item.date}>
                   {item.date} |
                   Min : {item.temp_min} &deg;C 
                   |
                   Max : {item.temp_max} &deg;C
+                  <br />
+                  Humidity : {item.humidity} %
+                  Max_week: {max_humidity}
                 </li>
-              ))}
+              })}
             </ul>
           )}
         </div>

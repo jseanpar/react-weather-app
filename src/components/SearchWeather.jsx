@@ -25,7 +25,8 @@ function SearchWeather() {
       if (componentMounted) {
         const lat = resp.data[0].lat;
         const lon = resp.data[0].long;
-        const appid = "5f530e3abd64193a00da67391d0a0f24";
+        //const appid = "5f530e3abd64193a00da67391d0a0f24";
+        const appid = "a5a47c18197737e8eeca634cd6acb581";
         const lang = "es";
         const units = "metric";
 
@@ -34,20 +35,21 @@ function SearchWeather() {
           params: { appid, lat, lon, lang, units },
         });
         const response = await instance.get();
+        console.log(response);
 
         const arr_weather = [];
         let ob = {};
-
+        //fechas iterables
         for (const t of response.data.daily) {
           ob = {
             date: now.add(1, "days").format("L"),
             temp_min: t.temp.min,
             temp_max: t.temp.max,
+            humidity: t.humidity
           };
-
           arr_weather.push(ob);
         }
-
+        //current
         const weather_info = {
           city: input,
           current_date: now_current.format("LLLL"),
