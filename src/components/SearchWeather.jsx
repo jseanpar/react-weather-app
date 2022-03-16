@@ -73,6 +73,7 @@ function SearchWeather() {
   };
 
   const setIcon = (weather_icon) => {
+    console.log(weather_icon);
     switch (weather_icon) {
       case 'Clouds':
         weather_icon = 'fa-cloud';
@@ -87,7 +88,7 @@ function SearchWeather() {
         weather_icon = 'fa-cloud-shower-heavy';
         break;
       case 'Snow':
-        weather_icon = 'fa-snow-flake';
+        weather_icon = 'fa-snowflake';
         break;
       default:
         weather_icon = 'fa-smog';
